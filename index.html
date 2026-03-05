@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaMarco Collins - Health Educator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-dark: #1a2332;
+            --accent-purple: #8247f5;
+            --light-accent: #c8e6c9;
+            --text-light: #f0f0f0;
+            --text-muted: #a0a0a0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #1a1a2e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(130, 71, 245, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+            z-index: 0;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -20%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(130, 71, 245, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 25s infinite ease-in-out reverse;
+            z-index: 0;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-50px) translateX(30px); }
+        }
+        
+        .container {
+            max-width: 520px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 245, 0.98) 100%);
+            border-radius: 30px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25), 0 0 1px rgba(255, 255, 255, 0.5) inset;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 50px 30px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(130, 71, 245, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(130, 71, 245, 0.08) 0%, transparent 50%);
+            z-index: 0;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, transparent 30%, rgba(130, 71, 245, 0.05) 30%, rgba(130, 71, 245, 0.05) 60%, transparent 60%),
+                linear-gradient(-45deg, transparent 30%, rgba(130, 71, 245, 0.03) 30%, rgba(130, 71, 245, 0.03) 60%, transparent 60%);
+            background-size: 80px 80px;
+            z-index: 0;
+        }
+        
+        .profile-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 25px;
+            z-index: 2;
+        }
+        
+        .profile-image {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 5px solid white;
+            object-fit: cover;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(130, 71, 245, 0.2);
+            animation: pulse 3s infinite ease-in-out;
+            position: relative;
+            z-index: 2;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        .name {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .title {
+            font-size: 15px;
+            color: #c8e6c9;
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(130, 71, 245, 0.2);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 10px;
+            z-index: 2;
+            position: relative;
+            border: 1px solid rgba(130, 71, 245, 0.3);
+        }
+        
+        .bio {
+            padding: 35px 28px;
+            background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #333;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .bio::before {
+            content: '✨';
+            display: block;
+            font-size: 24px;
+            margin-bottom: 15px;
+            opacity: 0.6;
+        }
+        
+        .highlights {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            margin: 0 28px;
+            gap: 15px;
+        }
+        
+        .highlight-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .highlight-number {
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #8247f5, #6a2acd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .highlight-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        .links-section {
+            padding: 30px 25px;
+        }
+        
+        .section-title {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+        
+        .link-button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 16px 20px;
+            margin-bottom: 13px;
+            background: linear-gradient(135deg, #8247f5 0%, #6a2acd 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 14px;
+            font-weight: 700;
+            text-align: left;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .link-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+            z-index: 1;
+        }
+        
+        .link-button:hover::before {
+            left: 100%;
+        }
+        
+        .link-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(130, 71, 245, 0.3);
+        }
+        
+        .link-button:active {
+            transform: translateY(-1px);
+        }
+        
+        .link-button.secondary {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .link-button.secondary:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .link-icon {
+            font-size: 20px;
+            margin-right: 12px;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .link-text {
+            flex: 1;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .link-arrow {
+            font-size: 16px;
+            margin-left: auto;
+            opacity: 0.7;
+            z-index: 2;
+            position: relative;
+            transition: transform 0.3s;
+        }
+        
+        .link-button:hover .link-arrow {
+            transform: translateX(4px);
+        }
+        
+        .testimonial-section {
+            padding: 30px 25px;
+            background: linear-gradient(135deg, #f9f9f9 0%, #f5f5f5 100%);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-title {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #000;
+            margin-bottom: 15px;
+        }
+        
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+        
+        .video-caption {
+            font-size: 13px;
+            color: #666;
+            text-align: center;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+            padding: 28px 25px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .footer-text {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8247f5, #6a2acd);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid rgba(130, 71, 245, 0.2);
+        }
+        
+        .social-link:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(130, 71, 245, 0.3);
+            border-color: rgba(130, 71, 245, 0.5);
+        }
+        
+        .divider {
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #8247f5, transparent);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .cta-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 12px;
+            font-style: italic;
+        }
+        
+        @media (max-width: 480px) {
+            .card {
+                border-radius: 20px;
+            }
+            
+            .header {
+                padding: 40px 20px 30px;
+            }
+            
+            .name {
+                font-size: 26px;
+            }
+            
+            .bio {
+                padding: 25px 20px;
+                font-size: 13px;
+            }
+            
+            .link-button {
+                padding: 14px 16px;
+                font-size: 14px;
+            }
+            
+            .profile-image {
+                width: 110px;
+                height: 110px;
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .card {
+            animation: slideUp 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <div class="profile-wrapper">
+                    <img src="https://scontent-iad3-2.cdninstagram.com/v/t51.82787-19/629664278_18567465697052001_2148846805137031198_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=111&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDI0LkMzIn0%3D&_nc_ohc=exWEwcxCNqAQ7kNvwFjPB6X&_nc_oc=Adn8SxXSmByBd8uyhx9IiFrJ67NWi7otmxicXVObEh5_XgA275xZn9huXfgYzkY9ssg&_nc_zt=24&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=AP4hL3IEAAAA&_nc_gid=sXtQJrQ0a9JNEj6d8oVC5A&_nc_tpa=Q5bMBQF22XltUc9zvg7BgqK0e3R0v8XWriFf29lyA0hp1rgQ-3iQfLA8q_CqiTxOIbo029X97r2vOp0h&oh=00_AfxL-LTOU-7W26XKEwlBqgsvtgSD8NIkY8q7g4VttJc4Kg&oe=69AFE72A" alt="LaMarco Collins" class="profile-image">
+                </div>
+                <h1 class="name">LaMarco Collins</h1>
+                <p class="title">Plant-Based Health Educator</p>
+                <div class="badge">🌿 Ancestral Wisdom</div>
+            </div>
+            
+            <div class="bio">
+                <p>LaMarco is an indigenous plant-based health educator. He helps people restore cardiovascular health and vitality through ancestral nutrition and conscious living. He specializes in mineral-rich plant foods, natural approaches to blood pressure and circulation, and the nervous system's link to digestion.</p>
+            </div>
+            
+            <div class="highlights">
+                <div class="highlight-item">
+                    <div class="highlight-number">1000+</div>
+                    <div class="highlight-label">People Healed</div>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-number">4+</div>
+                    <div class="highlight-label">Years Experience</div>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-number">107K</div>
+                    <div class="highlight-label">Followers</div>
+                </div>
+            </div>
+            
+            <div class="links-section">
+                <div class="section-title">Take Action Today</div>
+                
+                <a href="https://calendly.com/lamarco-v-collins/consultation" class="link-button">
+                    <span class="link-icon">📅</span>
+                    <span class="link-text">Book Your Discovery Call</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                
+                <a href="https://vibe-ignite-launch.lovable.app/" class="link-button secondary">
+                    <span class="link-icon">⚡</span>
+                    <span class="link-text">Solific Program</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                
+                <a href="https://natureshealthhaven.com/?ref=site" class="link-button secondary">
+                    <span class="link-icon">🌱</span>
+                    <span class="link-text">Nature's Health Haven</span>
+                    <span class="link-arrow">→</span>
+                </a>
+            </div>
+            
+            <div class="testimonial-section">
+                <div class="testimonial-title">Client Testimonial</div>
+                <div class="video-container">
+                    <video controls width="100%" height="auto">
+                        <source src="https://pub-b70cb36a6853407fa468c5d6dec16633.r2.dev/139019/rube-chat/chat-attachment/request/914d4724e5626336a2b84eff6a239d507a52bef6521af1cf6b275e9ae09dc93c" type="video/quicktime">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <p class="video-caption">See what my clients have to say about their transformation</p>
+            </div>
+            
+            <div class="footer">
+                <div class="divider"></div>
+                <div class="footer-text">Connect With Me</div>
+                <div class="social-links">
+                    <a href="https://instagram.com/_iamlamarco" class="social-link" title="Instagram">📸</a>
+                    <a href="https://www.facebook.com/lamarco.collins" class="social-link" title="Facebook">f</a>
+                </div>
+                <p class="cta-text">Follow for daily wellness insights & plant-based living tips</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
