@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaMarco Collins - Discovery Call</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #1a1a2e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: slideDown 0.6s ease-out;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+        
+        .header p {
+            font-size: 16px;
+            color: #c8e6c9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+        
+        .questions-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 245, 0.98) 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            animation: slideUp 0.6s ease-out 0.2s both;
+        }
+        
+        .calendar-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 245, 0.98) 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            animation: slideUp 0.6s ease-out 0.4s both;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .question-group {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .question-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .question-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .required {
+            color: #8247f5;
+            margin-left: 3px;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .radio-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .radio-label input[type="radio"] {
+            margin-right: 8px;
+            cursor: pointer;
+            accent-color: #8247f5;
+        }
+        
+        .text-input,
+        .select-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        
+        .text-input:focus,
+        .select-input:focus {
+            outline: none;
+            border-color: #8247f5;
+            box-shadow: 0 0 0 3px rgba(130, 71, 245, 0.1);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #8247f5 0%, #6a2acd 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(130, 71, 245, 0.3);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .calendar-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .calendly-embed {
+            min-height: 700px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .info-box {
+            background: #f0f7ff;
+            border-left: 4px solid #8247f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 1024px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 28px;
+            }
+            
+            .questions-card,
+            .calendar-card {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .questions-card,
+            .calendar-card {
+                padding: 20px;
+            }
+            
+            .calendly-embed {
+                min-height: 600px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Book Your Discovery Call</h1>
+            <p>Let's assess if we're the right fit for your health transformation. Answer a few quick questions, then choose your preferred time.</p>
+        </div>
+        
+        <div class="content">
+            <!-- QUESTIONS SECTION -->
+            <div class="questions-card">
+                <h2 class="section-title">📋 Quick Qualification Questions</h2>
+                
+                <div class="info-box">
+                    This helps us ensure we're the perfect fit for your health journey and can deliver the transformation you need.
+                </div>
+                
+                <form id="qualifyingForm">
+                    <!-- Question 1 -->
+                    <div class="question-group">
+                        <label class="question-label">Have you been medically diagnosed with a condition? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="diagnosed" value="Yes" required>
+                                Yes
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="diagnosed" value="No" required>
+                                No
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 2 -->
+                    <div class="question-group" id="conditionGroup" style="display:none;">
+                        <label class="question-label">If yes, please specify the condition <span class="required">*</span></label>
+                        <input type="text" name="conditionSpecify" class="text-input" placeholder="Please describe your condition...">
+                    </div>
+                    
+                    <!-- Question 3 -->
+                    <div class="question-group">
+                        <label class="question-label">How long have you been dealing with this condition? <span class="required">*</span></label>
+                        <select name="duration" class="select-input" required>
+                            <option value="">-- Select Duration --</option>
+                            <option value="Less than 6 months">Less than 6 months</option>
+                            <option value="6 months - 1 year">6 months - 1 year</option>
+                            <option value="1 - 2 years">1 - 2 years</option>
+                            <option value="2 - 5 years">2 - 5 years</option>
+                            <option value="More than 5 years">More than 5 years</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Question 4 -->
+                    <div class="question-group">
+                        <label class="question-label">Are you ready to make lifestyle changes to improve your health? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="lifestyleReady" value="Yes" required>
+                                Yes
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="lifestyleReady" value="No" required>
+                                No
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 5 -->
+                    <div class="question-group">
+                        <label class="question-label">Are you financially prepared to invest in your health if qualified? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="financialReady" value="Yes" required>
+                                Yes
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="financialReady" value="No" required>
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </form>
+                
+                <button type="button" class="submit-btn" onclick="validateAndProceed()">Continue to Booking →</button>
+            </div>
+            
+            <!-- CALENDAR SECTION -->
+            <div class="calendar-card">
+                <h2 class="calendar-title">📅 Select Your Time</h2>
+                
+                <div id="qualificationStatus" style="display:none; margin-bottom: 20px; padding: 15px; background: #e8f5e9; border-left: 4px solid #4caf50; border-radius: 8px; color: #2e7d32;">
+                    ✅ Great! You qualify. Now choose your preferred time.
+                </div>
+                
+                <div id="notQualifiedMessage" style="display:none; margin-bottom: 20px; padding: 15px; background: #fff3cd; border-left: 4px solid #ff9800; border-radius: 8px; color: #856404;">
+                    Thank you for your interest! Based on your answers, this program may not be the right fit at this time. However, we'd love to still chat and explore options. Choose a time below!
+                </div>
+                
+                <div class="calendly-embed">
+                    <iframe src="https://calendly.com/lamarco-v-collins/consultation?embed_domain=&embed_src=&primary_color=8247f5" width="100%" height="700" frameborder="0" scrolling="no" style="border-radius: 10px;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Show/hide condition question based on diagnosis answer
+        document.querySelectorAll('input[name="diagnosed"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const conditionGroup = document.getElementById('conditionGroup');
+                if (this.value === 'Yes') {
+                    conditionGroup.style.display = 'block';
+                    document.querySelector('input[name="conditionSpecify"]').required = true;
+                } else {
+                    conditionGroup.style.display = 'none';
+                    document.querySelector('input[name="conditionSpecify"]').required = false;
+                    document.querySelector('input[name="conditionSpecify"]').value = '';
+                }
+            });
+        });
+        
+        function validateAndProceed() {
+            const form = document.getElementById('qualifyingForm');
+            
+            if (!form.checkValidity()) {
+                alert('Please answer all questions to proceed.');
+                return false;
+            }
+            
+            // Get form values
+            const diagnosed = document.querySelector('input[name="diagnosed"]:checked')?.value;
+            const duration = document.querySelector('select[name="duration"]').value;
+            const lifestyleReady = document.querySelector('input[name="lifestyleReady"]:checked')?.value;
+            const financialReady = document.querySelector('input[name="financialReady"]:checked')?.value;
+            
+            // Qualification logic: all must be "Yes" to qualify
+            const isQualified = (diagnosed === 'Yes' || diagnosed === 'No') && 
+                               duration !== '' && 
+                               lifestyleReady === 'Yes' && 
+                               financialReady === 'Yes';
+            
+            // Store answers (could send to server here)
+            const answers = {
+                diagnosed,
+                duration,
+                lifestyleReady,
+                financialReady,
+                qualified: isQualified,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Log answers (for debugging)
+            console.log('Qualification Answers:', answers);
+            
+            // Show appropriate message
+            const qualStatus = document.getElementById('qualificationStatus');
+            const notQualifiedMsg = document.getElementById('notQualifiedMessage');
+            
+            qualStatus.style.display = 'none';
+            notQualifiedMsg.style.display = 'none';
+            
+            if (isQualified) {
+                qualStatus.style.display = 'block';
+            } else {
+                notQualifiedMsg.style.display = 'block';
+            }
+            
+            // Hide form and show calendar
+            document.querySelector('.questions-card').style.display = 'none';
+            document.querySelector('.calendar-card').style.display = 'block';
+            
+            // Scroll to calendar
+            setTimeout(() => {
+                document.querySelector('.calendar-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+            
+            return false;
+        }
+        
+        // Disable calendar until questions are answered
+        window.addEventListener('load', function() {
+            document.querySelector('.calendar-card').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
