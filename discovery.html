@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -50,7 +50,7 @@
             align-items: start;
         }
 
-        .questions-card {
+        .form-card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 245, 0.98) 100%);
             border-radius: 20px;
             padding: 30px;
@@ -100,96 +100,6 @@
             gap: 10px;
         }
 
-        .question-group {
-            margin-bottom: 25px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .question-group:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .question-label {
-            font-size: 14px;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .required {
-            color: #8247f5;
-            margin-left: 3px;
-        }
-
-        .radio-group {
-            display: flex;
-            gap: 15px;
-        }
-
-        .radio-label {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            font-size: 14px;
-            color: #555;
-        }
-
-        .radio-label input[type="radio"] {
-            margin-right: 8px;
-            cursor: pointer;
-            accent-color: #8247f5;
-        }
-
-        .text-input,
-        .select-input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: inherit;
-            transition: border-color 0.3s;
-        }
-
-        .text-input:focus,
-        .select-input:focus {
-            outline: none;
-            border-color: #8247f5;
-            box-shadow: 0 0 0 3px rgba(130, 71, 245, 0.1);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #8247f5 0%, #6a2acd 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 20px;
-        }
-
-        .submit-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(130, 71, 245, 0.3);
-        }
-
-        .submit-btn:active:not(:disabled) {
-            transform: translateY(0);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
         .calendar-title {
             font-size: 18px;
             font-weight: 700;
@@ -217,39 +127,11 @@
             line-height: 1.6;
         }
 
-        .success-message {
-            background: #e8f5e9;
-            border-left: 4px solid #4caf50;
-            padding: 15px;
-            border-radius: 8px;
-            color: #2e7d32;
-            margin-bottom: 20px;
-            display: none;
-        }
-
-        .error-message {
-            background: #ffebee;
-            border-left: 4px solid #f44336;
-            padding: 15px;
-            border-radius: 8px;
-            color: #c62828;
-            margin-bottom: 20px;
-            display: none;
-        }
-
-        .loading-spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(130, 71, 245, 0.3);
-            border-top-color: #8247f5;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-            margin-right: 8px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .jotform-embed {
+            min-height: 600px;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         @media (max-width: 1024px) {
@@ -261,7 +143,7 @@
                 font-size: 28px;
             }
 
-            .questions-card,
+            .form-card,
             .calendar-card {
                 padding: 25px;
             }
@@ -272,7 +154,7 @@
                 font-size: 24px;
             }
 
-            .questions-card,
+            .form-card,
             .calendar-card {
                 padding: 20px;
             }
@@ -291,91 +173,30 @@
         </div>
 
         <div class="content">
-            <!-- QUESTIONS SECTION -->
-            <div class="questions-card">
+            <!-- FORM SECTION -->
+            <div class="form-card">
                 <h2 class="section-title">❓ Quick Qualification Questions</h2>
 
                 <div class="info-box">
                     This helps us ensure we're the perfect fit for your health journey and can deliver the transformation you need.
                 </div>
 
-                <div id="successMessage" class="success-message">
-                    ✅ Great! You qualify. Now choose your preferred time below.
-                </div>
-
-                <div id="alternativeMessage" class="success-message" style="background: #fff3cd; border-left-color: #ff9800; color: #856404;">
-                    ℹ️ Thank you for your interest! Based on your answers, this program may not be the right fit at this time. However, we'd love to still chat and explore options. Choose a time below!
-                </div>
-
-                <div id="errorMessage" class="error-message"></div>
-
-                <form id="qualifyingForm">
-                    <!-- Question 1 -->
-                    <div class="question-group">
-                        <label class="question-label">Have you been medically diagnosed with a condition? <span class="required">*</span></label>
-                        <div class="radio-group">
-                            <label class="radio-label">
-                                <input type="radio" name="diagnosed" value="Yes" required>
-                                Yes
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="diagnosed" value="No" required>
-                                No
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Question 2 -->
-                    <div class="question-group" id="conditionGroup" style="display:none;">
-                        <label class="question-label">If yes, please specify the condition <span class="required">*</span></label>
-                        <input type="text" name="conditionSpecify" class="text-input" placeholder="Please describe your condition...">
-                    </div>
-
-                    <!-- Question 3 -->
-                    <div class="question-group">
-                        <label class="question-label">How long have you been dealing with this condition? <span class="required">*</span></label>
-                        <select name="duration" class="select-input" required>
-                            <option value="">-- Select Duration --</option>
-                            <option value="Less than 6 months">Less than 6 months</option>
-                            <option value="6 months - 1 year">6 months - 1 year</option>
-                            <option value="1 - 2 years">1 - 2 years</option>
-                            <option value="2 - 5 years">2 - 5 years</option>
-                            <option value="More than 5 years">More than 5 years</option>
-                        </select>
-                    </div>
-
-                    <!-- Question 4 -->
-                    <div class="question-group">
-                        <label class="question-label">Are you ready to make lifestyle changes to improve your health? <span class="required">*</span></label>
-                        <div class="radio-group">
-                            <label class="radio-label">
-                                <input type="radio" name="lifestyleReady" value="Yes" required>
-                                Yes
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="lifestyleReady" value="No" required>
-                                No
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Question 5 -->
-                    <div class="question-group">
-                        <label class="question-label">Are you financially prepared to invest in your health if qualified? <span class="required">*</span></label>
-                        <div class="radio-group">
-                            <label class="radio-label">
-                                <input type="radio" name="financialReady" value="Yes" required>
-                                Yes
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="financialReady" value="No" required>
-                                No
-                            </label>
-                        </div>
-                    </div>
-                </form>
-
-                <button type="button" class="submit-btn" id="submitBtn" onclick="validateAndProceed()">Continue to Booking ➜</button>
+                <!-- JotForm Embed -->
+                <iframe
+                    id="JotFormIFrame-260654424014045"
+                    title="Discovery Call Qualification"
+                    onload="window.parent.scrollTo(0,0)"
+                    allowtransparency="true"
+                    allow="geolocation; microphone; camera; fullscreen"
+                    src="https://form.jotform.com/260654424014045"
+                    frameborder="0"
+                    style="min-width:100%;max-width:100%;height:539px;border:none;"
+                    scrolling="no"
+                    class="jotform-embed"
+                >
+                </iframe>
+                <script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
+                <script>window.jotformEmbedHandler("iframe[id='JotFormIFrame-260654424014045']", "https://form.jotform.com/")</script>
             </div>
 
             <!-- CALENDAR SECTION -->
@@ -388,110 +209,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // Show/hide condition question based on diagnosis answer
-        document.querySelectorAll('input[name="diagnosed"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                const conditionGroup = document.getElementById('conditionGroup');
-                const conditionInput = document.querySelector('input[name="conditionSpecify"]');
-
-                if (this.value === 'Yes') {
-                    conditionGroup.style.display = 'block';
-                    conditionInput.required = true;
-                } else {
-                    conditionGroup.style.display = 'none';
-                    conditionInput.required = false;
-                    conditionInput.value = '';
-                }
-            });
-        });
-
-        async function validateAndProceed() {
-            const form = document.getElementById('qualifyingForm');
-            const submitBtn = document.getElementById('submitBtn');
-            const errorDiv = document.getElementById('errorMessage');
-            const successDiv = document.getElementById('successMessage');
-            const alternativeDiv = document.getElementById('alternativeMessage');
-
-            // Clear previous messages
-            errorDiv.style.display = 'none';
-            successDiv.style.display = 'none';
-            alternativeDiv.style.display = 'none';
-            errorDiv.innerHTML = '';
-
-            if (!form.checkValidity()) {
-                errorDiv.innerHTML = '⚠️ Please answer all questions to proceed.';
-                errorDiv.style.display = 'block';
-                return false;
-            }
-
-            try {
-                // Disable button and show loading state
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<span class="loading-spinner"></span>Processing...';
-
-                // Collect form data
-                const formData = {
-                    diagnosed: document.querySelector('input[name="diagnosed"]:checked').value,
-                    conditionSpecify: document.querySelector('input[name="conditionSpecify"]').value,
-                    duration: document.querySelector('select[name="duration"]').value,
-                    lifestyleReady: document.querySelector('input[name="lifestyleReady"]:checked').value,
-                    financialReady: document.querySelector('input[name="financialReady"]:checked').value
-                };
-
-                // Submit to Google Apps Script webhook
-                // IMPORTANT: Replace with your actual deployment URL
-                const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxZbB1Hdf-Nyjka0xYs18XrLHFpFLKv62m0TLCCUVthC31hkwOcZf5gyzGM5mxAaCBe/exec';
-
-                if (WEBHOOK_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEBHOOK_URL') {
-                    throw new Error('Webhook URL not configured. Please update the WEBHOOK_URL in the script.');
-                }
-
-                const response = await fetch(WEBHOOK_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(formData),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                const result = await response.json();
-
-                if (result.status === 'success') {
-                    // Determine qualification status
-                    const diagnosed = formData.diagnosed === 'Yes';
-                    const lifestyleReady = formData.lifestyleReady === 'Yes';
-                    const financialReady = formData.financialReady === 'Yes';
-                    const qualified = diagnosed && lifestyleReady && financialReady;
-
-                    // Show appropriate message
-                    if (qualified) {
-                        successDiv.style.display = 'block';
-                    } else {
-                        alternativeDiv.style.display = 'block';
-                    }
-
-                    // Scroll to calendar
-                    setTimeout(() => {
-                        document.querySelector('.calendar-card').scrollIntoView({ behavior: 'smooth' });
-                    }, 300);
-                } else {
-                    throw new Error(result.message || 'Submission failed');
-                }
-
-            } catch (error) {
-                console.error('Submission error:', error);
-                errorDiv.innerHTML = '❌ ' + error.message + ' Please try again or contact support.';
-                errorDiv.style.display = 'block';
-            } finally {
-                // Re-enable button
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = 'Continue to Booking ➜';
-            }
-
-            return false;
-        }
-    </script>
 </body>
 </html>
