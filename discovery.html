@@ -253,7 +253,7 @@
         <div class="content">
             <!-- QUESTIONS SECTION -->
             <div class="questions-card">
-                <h2 class="section-title">📋 Quick Qualification Questions</h2>
+                <h2 class="section-title">❓ Quick Qualification Questions</h2>
                 
                 <div class="info-box">
                     This helps us ensure we're the perfect fit for your health journey and can deliver the transformation you need.
@@ -325,12 +325,12 @@
                     </div>
                 </form>
                 
-                <button type="button" class="submit-btn" onclick="validateAndProceed()">Continue to Booking →</button>
+                <button type="button" class="submit-btn" onclick="validateAndProceed()">Continue to Booking ➜</button>
             </div>
             
             <!-- CALENDAR SECTION -->
             <div class="calendar-card">
-                <h2 class="calendar-title">📅 Select Your Time</h2>
+                <h2 class="calendar-title">🗓️ Select Your Time</h2>
                 
                 <div id="qualificationStatus" style="display:none; margin-bottom: 20px; padding: 15px; background: #e8f5e9; border-left: 4px solid #4caf50; border-radius: 8px; color: #2e7d32;">
                     ✅ Great! You qualify. Now choose your preferred time.
@@ -373,7 +373,8 @@
             
             // Get form values
             const diagnosed = document.querySelector('input[name="diagnosed"]:checked')?.value;
-            const duration = document.querySelector('select[name="duration"]').value;
+            const conditionSpecify = document.querySelector('input[name="conditionSpecify"]')?.value;
+            const duration = document.querySelector('select[name="duration"]')?.value;
             const lifestyleReady = document.querySelector('input[name="lifestyleReady"]:checked')?.value;
             const financialReady = document.querySelector('input[name="financialReady"]:checked')?.value;
             
@@ -383,9 +384,10 @@
                                lifestyleReady === 'Yes' && 
                                financialReady === 'Yes';
             
-            // Store answers (could send to server here)
+            // Store answers
             const answers = {
                 diagnosed,
+                conditionSpecify,
                 duration,
                 lifestyleReady,
                 financialReady,
@@ -393,20 +395,20 @@
                 timestamp: new Date().toISOString()
             };
             
-            // Log answers (for debugging)
+            // Log answers
             console.log('Qualification Answers:', answers);
             
             // Show appropriate message
             const qualStatus = document.getElementById('qualificationStatus');
-            const notQualifiedMsg = document.getElementById('notQualifiedMessage');
+            const notQualMsg = document.getElementById('notQualifiedMessage');
             
             qualStatus.style.display = 'none';
-            notQualifiedMsg.style.display = 'none';
+            notQualMsg.style.display = 'none';
             
             if (isQualified) {
                 qualStatus.style.display = 'block';
             } else {
-                notQualifiedMsg.style.display = 'block';
+                notQualMsg.style.display = 'block';
             }
             
             // Hide form and show calendar
@@ -425,6 +427,60 @@
         window.addEventListener('load', function() {
             document.querySelector('.calendar-card').style.display = 'none';
         });
+
+        // ===== NOTION WEBHOOK INTEGRATION =====
+        const WEBHOOK_URL = 'https://lamarco-discovery-webhook-h3t7gq4uf.vercel.app/api/webhook';
+        
+        // Intercept form submission to send to webhook
+        const originalValidateAndProceed = window.validateAndProceed;
+        window.validateAndProceed = async function() {
+            const form = document.getElementById('qualifyingForm');
+            
+            if (!form.checkValidity()) {
+                alert('Please answer all questions to proceed.');
+                return false;
+            }
+            
+            // Get form values
+            const diagnosed = document.querySelector('input[name="diagnosed"]:checked')?.value;
+            const conditionSpecify = document.querySelector('input[name="conditionSpecify"]')?.value;
+            const duration = document.querySelector('select[name="duration"]')?.value;
+            const lifestyleReady = document.querySelector('input[name="lifestyleReady"]:checked')?.value;
+            const financialReady = document.querySelector('input[name="financialReady"]:checked')?.value;
+            
+            // Prepare data to send to webhook
+            const formData = {
+                diagnosed,
+                conditionSpecify,
+                duration,
+                lifestyleReady,
+                financialReady,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Send to Notion webhook
+            try {
+                console.log('📤 Sending form to Notion...', formData);
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                if (response.ok) {
+                    console.log('✅ Form data sent to Notion Discovery Call Tracker!');
+                } else {
+                    console.warn('⚠️ Webhook response:', response.status);
+                }
+            } catch (error) {
+                console.error('❌ Error sending to webhook:', error);
+            }
+            
+            // Continue with original flow
+            return originalValidateAndProceed.call(this);
+        };
     </script>
 </body>
 </html>
