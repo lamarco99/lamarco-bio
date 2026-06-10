@@ -29,126 +29,37 @@
             position: relative;
             overflow-x: hidden;
         }
-        body::before {
-            content: '';
-            position: fixed;
-            top: -50%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(200,169,107,0.14) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 20s infinite ease-in-out;
-            z-index: 0;
-        }
-        body::after {
-            content: '';
-            position: fixed;
-            bottom: -20%;
-            left: -10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(140,106,67,0.12) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 25s infinite ease-in-out reverse;
-            z-index: 0;
-        }
+        body::before { content: ''; position: fixed; top: -50%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(200,169,107,0.14) 0%, transparent 70%); border-radius: 50%; animation: float 20s infinite ease-in-out; z-index: 0; }
+        body::after { content: ''; position: fixed; bottom: -20%; left: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(140,106,67,0.12) 0%, transparent 70%); border-radius: 50%; animation: float 25s infinite ease-in-out reverse; z-index: 0; }
         @keyframes float { 0%, 100% { transform: translateY(0px) translateX(0px); } 50% { transform: translateY(-50px) translateX(30px); } }
         .container { max-width: 540px; width: 100%; position: relative; z-index: 1; }
-        .card {
-            background: linear-gradient(135deg, rgba(255,252,246,0.98) 0%, rgba(248,245,239,0.99) 100%);
-            border-radius: 30px;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.32), 0 0 1px rgba(255,255,255,0.65) inset;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(200,169,107,0.25);
-            animation: slideUp 0.6s ease-out forwards;
-        }
-        .header {
-            background: radial-gradient(circle at top, rgba(200,169,107,0.16), transparent 45%), linear-gradient(135deg, #050505 0%, #111111 55%, #2B2B2B 100%);
-            padding: 52px 30px 42px;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        .header::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: linear-gradient(45deg, transparent 30%, rgba(200,169,107,0.04) 30%, rgba(200,169,107,0.04) 60%, transparent 60%), radial-gradient(circle at 80% 80%, rgba(200,169,107,0.08) 0%, transparent 50%);
-            background-size: 80px 80px;
-            z-index: 0;
-        }
+        .card { background: linear-gradient(135deg, rgba(255,252,246,0.98) 0%, rgba(248,245,239,0.99) 100%); border-radius: 30px; box-shadow: 0 25px 80px rgba(0,0,0,0.32), 0 0 1px rgba(255,255,255,0.65) inset; overflow: hidden; backdrop-filter: blur(10px); border: 1px solid rgba(200,169,107,0.25); animation: slideUp 0.6s ease-out forwards; }
+        .header { background: radial-gradient(circle at top, rgba(200,169,107,0.16), transparent 45%), linear-gradient(135deg, #050505 0%, #111111 55%, #2B2B2B 100%); padding: 52px 30px 42px; text-align: center; color: white; position: relative; overflow: hidden; }
+        .header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(45deg, transparent 30%, rgba(200,169,107,0.04) 30%, rgba(200,169,107,0.04) 60%, transparent 60%), radial-gradient(circle at 80% 80%, rgba(200,169,107,0.08) 0%, transparent 50%); background-size: 80px 80px; z-index: 0; }
         .profile-wrapper { position: relative; display: inline-block; margin-bottom: 26px; z-index: 2; }
-        .profile-wrapper::after {
-            content: '';
-            position: absolute;
-            inset: -8px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(200,169,107,0.95), rgba(140,106,67,0.65));
-            z-index: 1;
-            opacity: 0.92;
-        }
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 5px solid #fff;
-            object-fit: cover;
-            object-position: center top;
-            box-shadow: 0 18px 45px rgba(0,0,0,0.36), 0 0 35px rgba(200,169,107,0.24);
-            animation: pulse 3s infinite ease-in-out;
-            position: relative;
-            z-index: 2;
-            display: block;
-        }
+        .profile-wrapper::after { content: ''; position: absolute; inset: -8px; border-radius: 50%; background: linear-gradient(135deg, rgba(200,169,107,0.95), rgba(140,106,67,0.65)); z-index: 1; opacity: 0.92; }
+        .profile-image { width: 150px; height: 150px; border-radius: 50%; border: 5px solid #fff; object-fit: cover; object-position: center top; box-shadow: 0 18px 45px rgba(0,0,0,0.36), 0 0 35px rgba(200,169,107,0.24); animation: pulse 3s infinite ease-in-out; position: relative; z-index: 2; display: block; }
         @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.02); } }
         .name { font-size: 32px; font-weight: 800; margin-bottom: 10px; letter-spacing: -0.5px; z-index: 2; position: relative; }
         .title { font-size: 15px; color: #F1DFA8; margin: 0 auto 12px; font-weight: 650; line-height: 1.45; letter-spacing: 0.3px; max-width: 330px; z-index: 2; position: relative; }
-        .badge {
-            display: inline-block;
-            background: rgba(200,169,107,0.14);
-            color: #fff;
-            padding: 7px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 650;
-            margin-top: 6px;
-            z-index: 2;
-            position: relative;
-            border: 1px solid rgba(200,169,107,0.38);
-        }
-        .bio {
-            padding: 38px 32px 34px;
-            background: linear-gradient(135deg, var(--soft-ivory) 0%, var(--ivory) 100%);
-            text-align: left;
-            font-size: 15px;
-            line-height: 1.75;
-            color: var(--charcoal);
-            border-bottom: 1px solid var(--line);
-            position: relative;
-        }
-        .bio::before {
-            content: 'Grounded Guidance';
-            display: block;
-            width: fit-content;
-            margin: 0 auto 18px;
-            padding: 7px 14px;
-            border-radius: 999px;
-            background: rgba(200,169,107,0.18);
-            color: var(--bronze);
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
+        .badge { display: inline-block; background: rgba(200,169,107,0.14); color: #fff; padding: 7px 15px; border-radius: 20px; font-size: 12px; font-weight: 650; margin-top: 6px; z-index: 2; position: relative; border: 1px solid rgba(200,169,107,0.38); }
+        .bio { padding: 38px 32px 34px; background: linear-gradient(135deg, var(--soft-ivory) 0%, var(--ivory) 100%); text-align: left; font-size: 15px; line-height: 1.75; color: var(--charcoal); border-bottom: 1px solid var(--line); position: relative; }
+        .bio::before { content: 'Grounded Guidance'; display: block; width: fit-content; margin: 0 auto 18px; padding: 7px 14px; border-radius: 999px; background: rgba(200,169,107,0.18); color: var(--bronze); font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
         .bio p { margin-bottom: 16px; }
         .bio p:last-child { margin-bottom: 0; }
         .highlights { display: flex; justify-content: space-around; padding: 22px 0; border-top: 1px solid var(--line); margin: 0 28px; gap: 15px; }
         .highlight-item { text-align: center; flex: 1; }
         .highlight-number { font-size: 22px; font-weight: 800; background: linear-gradient(135deg, var(--gold), var(--bronze)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .highlight-label { font-size: 11px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 650; }
+        .success-section { padding: 32px 25px; background: linear-gradient(135deg, #111111 0%, #2B2B2B 100%); border-top: 1px solid rgba(200,169,107,0.22); border-bottom: 1px solid rgba(200,169,107,0.22); }
+        .success-heading { text-align: center; margin-bottom: 22px; }
+        .success-heading h2 { color: var(--gold); font-size: 22px; font-weight: 850; letter-spacing: -0.3px; margin-bottom: 8px; }
+        .success-heading p { color: rgba(248,245,239,0.76); font-size: 13px; line-height: 1.55; max-width: 420px; margin: 0 auto; }
+        .testimonial-card { background: linear-gradient(135deg, rgba(255,252,246,0.98) 0%, rgba(248,245,239,0.97) 100%); border: 1px solid rgba(200,169,107,0.30); border-radius: 16px; padding: 18px 18px 16px; margin-bottom: 14px; box-shadow: 0 14px 30px rgba(0,0,0,0.18); position: relative; overflow: hidden; }
+        .testimonial-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--bronze)); }
+        .stars { color: var(--gold); font-size: 14px; letter-spacing: 1px; margin-bottom: 10px; }
+        .testimonial-card p { color: var(--charcoal); font-size: 13.5px; line-height: 1.65; margin-bottom: 12px; }
+        .testimonial-name { color: var(--bronze); font-size: 13px; font-weight: 800; text-align: right; }
         .links-section { padding: 30px 25px; }
         .section-title { font-size: 12px; color: var(--bronze); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 18px; font-weight: 800; }
         .link-button { display: flex; align-items: center; width: 100%; padding: 16px 20px; margin-bottom: 13px; background: linear-gradient(135deg, #D9BE7C 0%, var(--gold) 100%); color: #111111; text-decoration: none; border-radius: 14px; font-weight: 800; text-align: left; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); font-size: 15px; border: 1px solid rgba(140,106,67,0.35); cursor: pointer; position: relative; overflow: hidden; }
@@ -162,11 +73,6 @@
         .link-text { flex: 1; z-index: 2; position: relative; }
         .link-arrow { font-size: 16px; margin-left: auto; opacity: 0.8; z-index: 2; position: relative; transition: transform 0.3s; }
         .link-button:hover .link-arrow { transform: translateX(4px); }
-        .testimonial-section { padding: 30px 25px; background: linear-gradient(135deg, var(--soft-ivory) 0%, var(--ivory) 100%); border-top: 1px solid var(--line); }
-        .testimonial-title { font-size: 12px; color: var(--bronze); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 18px; font-weight: 700; }
-        .video-container { position: relative; width: 100%; height: auto; overflow: hidden; border-radius: 12px; background: #000; margin-bottom: 15px; border: 1px solid rgba(200,169,107,0.35); }
-        .video-container video { width: 100%; height: auto; display: block; border-radius: 12px; object-fit: cover; }
-        .video-caption { font-size: 13px; color: var(--muted); text-align: center; font-style: italic; margin-top: 10px; }
         .footer { background: linear-gradient(135deg, #111111 0%, #2B2B2B 100%); padding: 28px 25px; text-align: center; border-top: 1px solid rgba(200,169,107,0.22); }
         .footer-text { font-size: 13px; color: var(--gold); margin-bottom: 18px; font-weight: 650; }
         .social-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 15px; }
@@ -174,19 +80,7 @@
         .social-link:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(200,169,107,0.25); border-color: rgba(200,169,107,0.65); }
         .divider { width: 50px; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 15px auto; border-radius: 2px; }
         .cta-text { font-size: 12px; color: rgba(248,245,239,0.72); margin-top: 12px; font-style: italic; }
-        @media (max-width: 480px) {
-            body { padding: 14px; align-items: flex-start; }
-            .card { border-radius: 22px; }
-            .header { padding: 40px 20px 32px; }
-            .name { font-size: 27px; }
-            .title { font-size: 14px; max-width: 280px; }
-            .bio { padding: 30px 22px 28px; font-size: 14px; line-height: 1.72; }
-            .link-button { padding: 14px 16px; font-size: 14px; }
-            .profile-image { width: 124px; height: 124px; }
-            .highlights { margin: 0 18px; gap: 10px; }
-            .highlight-number { font-size: 19px; }
-            .highlight-label { font-size: 10px; }
-        }
+        @media (max-width: 480px) { body { padding: 14px; align-items: flex-start; } .card { border-radius: 22px; } .header { padding: 40px 20px 32px; } .name { font-size: 27px; } .title { font-size: 14px; max-width: 280px; } .bio { padding: 30px 22px 28px; font-size: 14px; line-height: 1.72; } .success-section { padding: 30px 18px; } .success-heading h2 { font-size: 20px; } .testimonial-card { padding: 17px 16px 15px; } .link-button { padding: 14px 16px; font-size: 14px; } .profile-image { width: 124px; height: 124px; } .highlights { margin: 0 18px; gap: 10px; } .highlight-number { font-size: 19px; } .highlight-label { font-size: 10px; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
@@ -195,7 +89,7 @@
         <div class="card">
             <div class="header">
                 <div class="profile-wrapper">
-                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHCAkIBgoJCAkMCwoMDxoRDw4ODx8WGBMaJSEnJiQhJCMpLjsyKSw4LCMkM0Y0OD0/QkNCKDFITUhATTtBQj//2wBDAQsMDA8NDx4RER4/KiQqPz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz//wgARCAFAAUADASIAAhEBAxEB/8QAGwAAAwEBAQEBAAAAAAAAAAAAAAECAwUEBgf/xAAYAQEBAQEBAAAAAAAAAAAAAAAAAQMCBP/aAAwDAQACEAMQAAAB+TadDBGDAGDBRjE2AMEUCAAYIaEwEMEmgVIkpCTQhoSaJY0GAwajAGMGMAYAxC856Z8iPc/BuehMENCYCGhDQlSEmEjQlSIY0GqAGoxgFA0wYBNOXya9r0Za8F9+p183l9LlZ856vZzdMt2HXKGhDQJhIwlUhJhKYQwRtNW0xgwYDAGDM+ny+1xptpF4b6Nsyx3x6mPG7XK0ziovTFACGgAEmhDQk0JMIYAxjBg0xgDaYMZPW5vvz033zjHbpPn7rfjWvXPl8XR5vfGDZrigATQACAEqQk0JNENMbTG0wpAwBtMbQV0+X1c9Kv1aY7eOqFy8nR3045GHS5tnlA1wQAIABiTBJoE0KaSQJq2mNoG0xgDaYxMfR5u3PXavx+jz+lXlVh6PKqz8q8muKB95oAE0NNAmgTQIBIEzaatpjaBgFADaYABUh0Np0x31vFNJy28nWb8f03F1w8QEAmIAaAEAJoJaEnJLTG0DaY2mMTGJgAPNY2ffcD6fTLv5vTz87nXo9D09jXKPivtfznTPDfyB7Dy7c3RBKxAJoE0CchLRLljqWNpjExik0PPFm2WvtnXNfQZ9jeGvD5DzLzac/VfT/IdqWvgfpPm+omn1IVKHrio9deMl9az0AFKJoSaIqWNoKExhJlIdcm0d3jR7X6fP6PHWvmr1d35y+8+Tl4p1x+94l44ejVenXnri8r6jm65cdVO+ABKFKx65UaguOgAlORCY2mNyxwT1Iuuxx0e2dvP6XalH4/Rh0nnerw6ZebLedMur6ceh5fX6ICWcfRlZx+X9PzdcuTXpx2xSoskZWjy04rQpUmiXLG0Dazsvtnsl8emHt8/prXHOX1Ryub3n1eJnW2XtPLq5aVV015Obx39m/nO1hv61NS5Yez0Xk8702w+Uy+0+H24qSR6Y0aiOOhCE5Y2nYqTs+q7fzP1XHfyWnV4+W3k4na4u+A1VioozKUbXjqZTorMlolv1ent8dc/08314bdJeP6brnj/G9nk+jHKdYsSEVr59JbTXNkAbk6lEOPd9v+d/Ty/S8nXgS/PoffIxiuaICydMdYGqsXa4wfacfhZy19b8Z9dz16Otv8XLy0jbNoowWkxM6TFkVKgVMRDFqZ9HmTXc4kuHU1TACpoi87QZJdzVJAKLiIpRL2PD5dK1R6epiZsrPSBqpiAmKQpWINJlABTujm5XndjB0rizMTNcdoNGiyXNChzEppUBzb0xfU9EDscOC0SE1ICOaAA0UVOsUJy4sVliYaZ6Vi1RSJTaayqhSCFAgUTDRlRjZnWkhZUiGhSgiGgBljaco0ExpnZVRQaZaVk5ZaCLgOo0KBBagAANaiua87IwdRZRLpoQFHNmmwAGJjECi4sbTFpmyXNA0DZPUaFK0FAADRd5ac1iIJoMTWbIGj//xAAsEAABAwIEBgICAwEBAAAAAAABAAIDBBEQEiAxBRMhMEBBFCIyUDM0QiNg/9oACAEBAAEFAv8A0XRXH6UmyLicQg9Dr+hJstyIZCvjvXxnr470Y3BDogb/AKCOPmFrAAFZWRCIT4mlfg7zn7QC0aGJwKnH3H4+a/aMfRBDEoqpCZ+HmlAoOamvYUFZOyhFzUT0m/AbeaBcsRfG1ExlMeU5xA/I3iCfls4Zv0DNmx2UUWUBv2mQaCmwBqDMq2PnxpqPQN3lUSIT0/bzwQCwp5+oczNK9qaRmcekjl9eR58f5MKuvZ6C4RKcf0I3BX2TQ9fe7s+Z3QRt5k2x/QStyNG2Z7VzJSgpHKgpywV7eXV+e42AibJSFr6d7XhZgnSAKjozmK4sb1IdZX80uW6h6xyRtkZUUb4i0OkdSUbYcHbVL+bPhnKDx5Jer3xp/wCGedlPFPxCeUx1E7XU/FRe9xXycul0gkLOsw8PMFmwjjdITS2XxSviOVL/AFHx5m1MPImcbLh9F1fKyKTiU/NjxOm5CDvAJxjYXmNoY0MzIsAOVMcY0VXvElVQta6tmm5a+6ALlkUsAIO+n2m7d07YMaXuYwNACCczMuUCgwBSVBipWm5Y4sllcXy/9LsBaiiFPFm1DBp7xwa0uMMQYBiT0cXE5FWnoxO6O5zgIn5jdHAhTxaRt3ivTGF5iYG4NGPRSSMYIJefPXW+UEfya8OTGjLjsnBSxAowPCsjtiO62AU8JN0E0aJqlrU55e6hNqyt/uhFUf8AWp6gE4boojpYOlDiqqma+KVjmaRt2d1wuEPn4qxwkZ1QsFnATpmhPqwpJ3vwCjOWWodmqRgyTJSqGqcxRzserq4RsRHCfig5k/rHxNjfhonEHt8I/jniE8IFiT0qLth0DD2NQlkCZUuTZA4Nke0N5Uqo2ulqeMPtBjcYDfs8LdYtKrYlG0yycSeOdobh7C9aKWhdKTQxBgbyyChZU8fKg4lLzarRbAHs0snLnaV6dkoqe9zoC/0UMPeHDGDnPrKdqn4lmBkc50sGVlAzmy1k3JgO+sbdhk5dQ0/9bisoc7SF/pDAaThwmquBlYK+cyTaHb4js0lSIDNXvIcS52kI7r2hrY4sea+ocScRgdhgde62HZCO+IwOsFDdzQW3xGHvV/m+IF07YaQjurdMfesFAp4V8QvfaCO2kI76R2Bg21z1OPvsjH3iEEd8PaPZaiNXvsDQ7QMDvh77TdkR4R1e16CO3ZbtgR4J27AXvst2xPgHT6xHbbpI750jvjfs/wD/xAAjEQACAgIBBAIDAAAAAAAAAAABAgAREBJAAyAwQSExE1Bg/9oACAEDAQE/Af14FwdOaCfjEZa4Cdj/AFwE7DwOnNRjWNwFNGXLwx4KyxDCfngg1NoWvgBSZo2RD5lW8uPeFWhh09jyKtyqwYzCu109+JRBguIWvIbWBgcP9QeETb4hN94Jl7RhrDwbgMY3/Vf/xAAgEQACAgEEAwEAAAAAAAAAAAAAAQIREBIgIUAwQVAx/9oACAECAQE/Afnt0OZrZrYnfQnsj0J54F0JmpnstoXQkrKFiK6Lylx0WjSJCKK8lFpGtYQxbK8UpVmOJO2WQn6ex70SlQ3eEJbYz9PxNjKFBiillxscWsJ0yToTvD3MrkSy9jofBHn9EsvaxbVmiSIrqLq38BfB/8QAMxAAAQMBBQYFAwMFAAAAAAAAAQACESEDEBIxQSAiMkBQUTBCYXGBE1KxYoKhBDNgcJH/2gAIAQEABj8C/wAjz6VXonCsrsll0KXKg2slB6AOkDwJQ6D2vzVLjz8Kqqt0qLt4rRUUdAKNMwjrOpvmAQjMOpA9FnKPt0h3QBhyvF1L3Tnp0PJbo6NQrILhWlzWd+hWLvK5l27VRhi/6r+I5L0fXoLbN32hYLTLR2x9W3FdG3Afa3oLfZYXiQpZLmfysLJcSsTt5/fte9/c87TYYfRY3/8AFQ4G9mqW2hWH+oH7mqiefjnqLiXEs1Zd8KOLXNYJkaKAhbWvwFxGdU1rO9fCryfooCqqLNbrqdrqeWiAfVYWiXfhVN29VSyh5qAgBsVutK1yapQc3MFFzNe6iirfIz5iBtUot57imWYyzv4CsUbMjlqKm1JKwcIWEeUXArPbxZRmVOEx7cmLW1E2juFp0UnahtSpcrP3hWnvfaToVBodqzOGKfys1jsxDuywvEH15AuNcH5Vm/yxHzsVK3arOBe13Yq0P6r7RurjF0OqFQ7GImTmisGrinSMsuQtPdOYfhQaRdj7mB43EVvKihuQzDTVA2hwuAkGIosbuGzyTWfceQe35u+q39yDG/J7IWTOCyEeNNqCxn5RDG17lQQvxcBqalGMm05Bp0yN0HJWjxnNFJ8U2rohg17qTaYj+mqIs7OPUlVcsdnULF5W/lOdrpyUyZFHEJtT6YkxgOWfJfQfn5UQBE5oid1ppyTsXCVFmYUkyeSDmmCF/cgdhyPrzNUTQc3J8X0U5ToqdHmJ9FP+9//EACsQAQACAQMDAwMFAQEBAAAAAAEAETEQIUEgUXEwYYFAkbFQocHh8NHxYP/aAAgBAQABPyH/AOiUZSe2mzhv9EDKYHYm9SokxZEO4iBZ+g1/eUtsrCLvB/7T/NxH+03dZGraVLPr8EvMB+8rxEFEN0Tzo7Mctgv4R+vVadEECJ7Qxhld+8dh+uGzzKCc1qwjcXVSzj9UDp4PZNIW7aexOMfKEqUlS2MdK9qgOx+Irugont9dRd0ItcYBdKJve/nbclu03VFLqiUqGC8ftUahy/XmYLs5gYztNylLahRuB2lG3iW2lokCqgl6u42pGFK8o733fQP0G8JulIK9JbJAqHNTO8H6B2aze9VcqL9pTDd8bzlZ3E0VJLfc+WX/AJ+gPDvKNok2haa2dqg4O4AYCbcut/QVQe0vpOYlbL5iTJ8zJ+TLKAPPEtUsyznjxEUHJt9A/QtwgL947rBdiElvmYG7cyh3zFJ0NHsQXTF8X9Ase8FXbYTI1mVJ3+JndRbLMVu9iUH4D8wbQQ/cnO3IBNn1X6ATG8VTcVv2/iICrkY68Yw/7Dr8EQ0/ymIRBZxPhQ8aYgHvEZ2mfp7o0Clu6EVm5P4jix7DKz/E47ylSucbyhqXwfkgbFYyhMpT50JWuAYd5BOfo0PeL4irmVnHlZS/5ntvtECwr4ly42AqFcXWhxLnAWvaUOSPgHP80TB2YL+8Iapu2Tz6AwGJf0C51rZhllAdpcvfc3wo8wLz+8p3Zd+zo7Wjf3ni1eZawz4jkgrutZh7uHxClgIoB7HeWEOydRDiK/GX61zoI/8ADSKK8YgJ3FTmF+Zhgm+xsN2ueDYmH4JDgoBG4p3TbII7M2oB/wDbEppz0BOToAt89LGHWrnLKET3DBRtmBWlcFBg8TP4m6P2leILBomQSoePtFJM8wDufafZOZf4m/Xvz7zzoaYZUqDZ6j2hDEw5YNQ/uHtKJcXeVa1mwgQiN0XfLAEFAExlBhsNy3ob4lBVTHGlXGLoZbag/ogXglRLDSbzY5gNVT6d0bzLDZpo23uZYstYWttp7DKrRoN2Wp/xS7Vs8s/ciuJ7Q7QmyMk8Hi3MtcYlwaaN7xDmaO7diCr8oeJwWr4jKntiOi1zor6D0rRcu+0BOgs8pYq9p7QGvBD7s8SboEPtZQen2Br9ut/eUbhWhxKW4T+Yyp8vzAdiBrZ0ki5Q1B53R2g3FWZMJFT2AP2gGBa37b6cBpb2lEu/QS4RB7h/EyFO67PEZCsqSUxldf20ejOcz36OIxJU3GxmEkN5HcmcHuhdHebpeUgPemFhuUZ4T3WQqt+JVebXwaJF0Nu82el+NtD47/LmTt+BH8WPnnpynLGFLhlSpU81lKfCF5GbJdR3Il4OZsHPKckYKqXz/MStKzr/ADOIkSUaNyX+eu5cv3L7DLiZY2ikeZzZovleIpEtW16c5ymI9BUqX1G2XRaMvsoRsjGKyNU27ab8kG2Xu/wm6Hb5RW11S450qJFfokLBuZDv9o3YpbeSr2uXod6PfoNM45SrKmWmTre8dDKdtnPk7QCK66QVYSn56MTkmXVV6JEFHB3nzvTMUOTKw6ueGJWemOpiMYxQCrE4m87ZVNEs0uYRbdLOc6r0NS1RmWFwGXtrVA94dbHacRZhooRjHXhcRFMjmEEodq0ZxONfLoNShLniKd3WxD6A+IYDbBE94aZ1MeiiUZLgOYE0N6hsIuG1zKOccx6b6BRNyhDRxDVmJe050WjUsekXiDUQKAvKK2gW3RqO8ZcaPTUWHnV2g6jOhnWjHq5y7eYgx6Hf0Bb0ZQ6BomNDRdvpnMaXrzOesLgV0Y6GhnRgZe7HzM4/VHOaDrz1BcNusNL3nEc6XUV2xb9YHk9EOvDoYM86cTYMI+jy6ex6+ENWLZ1cTiYPSfUS5THxp//aAAwDAQACAAMAAAAQKnLfGqiCyeCGiCOCyOiuznaG2Cae2cuSGqmm2auyzrayaOiC/Yqrq2mS6Sa63KCSmG6cE48oiOCCWmO6GySuWuqje8/PSaWuOyOK++qmeuiTqe1cCie6aWGbe6G+W2KKUAaQ6qWWmeKL+yGWGiCqMgUhyKqeKWe2yG+CaayfHy45xp+O2+WOOuqaaP2Cf1m6MdnGxmKCumeWnagmg65N60uB9mqmaiKITwBoV5pUVG2yM9GyKmlZZYXUTVGKVERFyf8Arjqa0O1TNN2Q2KZjVhTbdlvCsiPgoMHl3/TKljsP3UCjfWbnoG0yYZx2nriChxrr63quqCkDQO4Lnk7x1bd6fUiWgLp5pZykRVNTSjXZSppa9OJqRyIAXDvbRfqkmjtSSi8vfjDBDDosff/EACARAQACAQUBAQEBAAAAAAAAAAEAESEQIDFAQTBRYVD/2gAIAQMBAT8Q7tdJFRA9dN8InQnMNHpG69jFZfocopmViIZgdECxGLKj8dFWTDkj/OjF0hYuNDLl/S4FYT+E8jAuCBHOy5fxv28QAxMkCqTmFZ7KJbsDnex3/IAUS5+mMoQ5grm9bMI41HassS4AihCcRuWrLEJxKgtkNtMStDG3mLEytEV6mhLgeGFEAY5Ys6YhtI8bXS5aMMVW/bzaRvqp8D61/mf/xAAgEQEAAgIDAQADAQAAAAAAAAABABEQISAxQUAwUWFQ/9oACAECAQE/EP8APAWxfDGe0P4C1GEJ3+FV+QPIEVv4OsC1Bgkuu/goRowF7lW/EmmENs7XwBLJoyvBtFH46wXUs/rPZRiDcYms0YJXMxXo7i23BGK9Toi0eT9IpwBr8AZRWwJ+pHHceogeZrIG4d4SniEq0RLBMb3Ooj3gC3Hdy5ULF2HIFnALhqHc1ighPcqlQeyAcS/0Ov5KDFs2cE6y3d59jgRLlYFTzM1hywLNx00cPZ1DrKRhi8uQjrA4OTGGlMJfG4t8CVHjUYObzfJc95PeLl/hO8HfJ74//8QAJxABAAICAgICAgIDAQEAAAAAAQARITEQQVFhcYGRoSCxwdHw4fH/2gAIAQEAAT8QODghqBiEIfwCVKgQIcJniuDn3GJKjiPDHhjGHFQJUCEIECVAgQMypUqVKgcVzUpjOv4JEqVEiROGVAgQgQIHAcBKgckripoF8sHwfmghYfBlZiSpUqVxRwmY8JOox5SBAhwanfBwECEqG5UIbe3iON3op3EyXbtPEo2lhFLSesR8Pndn+5YWxjuVxU7juPDKiSomI8piEqECGIQgcEIEDgLh0CXPxMATvWWIgHhWAOI/tMWAPmGjBK1SB4NtMkGqROg38wO87PESB/JzwnKR4YTqEOAgZhAgQxDJx3FEXARjzdQGLf6gIh6IOA1GYAdIGdVAUVEZrcKYfmLVAfkPMqVKjHipVEqMSVGMdxL5CEIQMQJqE3DDAuBUWgcrUoSZbXFQ58QO2GODM6Y7aoqEH/yFnG5ZnBsHcz1eI8VxU08O+EiRjHcYQIQhCEISoQhxZRCY4KMKxG1QS7kRjR+46NkTfU38R1Chh+Z/w+YkIxIsqOuWMYxjKhO4ErEC+DkHmEIZYAGMK/c0l7ivpDZcGyJ0jbFlHDki+Vr5l/hG40RnyXctQX2tkDzBieqhzeI65S48OoxO5UdR1DghCGCEODglQ3FJq3RcIhgUkqKdjQB+YHQPIPspxGlFr3iWEMoqTRtYCML1Vy1D2LEGGqOvEdpDjU6eKlVGdRMRIxxGO4QhAhycHJwqCbG4aoDPJm2D09SsgmRaAQlVGIJoLVXFYGqiNuGxaspfnOPEZbAYtgr3ZWJ85JDQPk8SuHi5c+JceOox1KicCdQlw4NckIcDmXGCvof1AYXLtIINmWDI9wX2YfIIFUyj3LD7bf65f4dzcqMY8OIxhLlwhCGHjXBXPxDWNyjq0hBvHfh8ktBuF2a7TxKwUDCoH4ZSAjjC34IA9aqJlNOyWNOWZbqp7LTR6Xa+qjvl5dQ9xYs3HcY5jqdQhCHPRLxN8EOCXKLtGpvmZYmphjqvZCuoWvFXKgNNlVH7YqXvBFz8w4N5jMcM2cVmajL5dYhDMCEOLh/Dr+CkbVzKWB3MBYpYM/mIUadzaRv13ENAPa7B9TCBGqCeuVfTJH4uGXSqPCQZcZUrM75eWYjFihCEN8kNwhD+HUWo0jAgaGUfpiHsJ1MU/wAXTMYRctv+IHJfCsQ12WA8xMNmTL7Xwv8AXzMDh6daH8p+/wCFxxDn5ncOXUYwhwMIS4HfITXHcue4Boj1nxAhQ9x/abEYf8fHXxB6Oru4BYY9wpFZgC1XoO2KCd0z6vt6/MzIpWQPkq/1UYB/mEsxPwzrhcS5cWXxmosdReDCDCBCENwnfBLxwIZWj3Lbd+ooK1GH5D+lA0Pgfv0+5sRbSsfZ09k1JYfXtej3FGKdtW6t/e/iCo6SgWsdPTvoMH6CVOiWPmN5aeGeTfeodjJHlol3Hi4+ozFQhDkhvgZcuIsUDywjAt8ssjPHh2kHXH/pFJLRb8L18scmcxur2sv6Ix3WVT5FZhRbwGV/z2fiFzaCREVfdcI5PiCISIjTuVHcx66gf5ya+r7xMutRGXmXGomI4JuMIQhDU3ytbneW9R+AHuLW1+YiMB6RGLFX6/3BEph7/wDuNzgwNL+4rAUnazD/AFAlLrcoTUXMgMKVefcU9wt9TPc22ZPb34JTEKsyf7fuAsyrZVFG/ljY0E+SJWtT3MUe3FQFeHhwuL9wQMh9ajKjgm4xxFxBlTUMQYMI4zF9XjnSj6H0e4DMD+/mIINmB0ShpdoRM0/ky5Ne138hUVl5+Izu4AoiFtPtr6l5xBb1SSy/wy2Nl2uzS+fiAbXlOSdsSrhClU9kWBHPhAMllImSUfccXU0cBBb9EFRSXvCWjLzHcYsIMuGIZlQipTtx2FZXw8wyaD8/LDWaHaWROjEYNOmqYouq6XUr6J8Q4CUbai3n0Cn1GZFAoeCXkY67R1E3XwGRCnUDoIaZeGNm+mBdoYY5pZ0kcCBP/hjMCDCPU2/Ecw4BZ5GLRkX1CDDpfLFi5CDCEGXUuOb6n90I2nt6D3MgytvawBJVvKwUS0D1qavCyzCMrb9QFVl8H4oOp622q0Z/E2Mt34iQpNELniZhC1SoXkHuAL5RKou81DGS14jrwJh/zcpLpTeRhBiGBfBDVW2b2xtM1+ZceGXDUIQYPCDDbMaTUEfSTA2G3te5g4QAJvth2pH3HcWjzFYS0HR5fRL6CqaaOvUodJl31eXtzDUZJAo8gzID7JiMUZIDgj6iWCtxBrTLpEsgEPMbYRClzrbOtw6WfYh9kvkA2JqCz6jgniBu4mJhlw7lxZdRjiDDMOCIsUb1WrqGPjcu1PtDrRiJ50qAD6MRg0epor5JptqNog1fcJGgJXgOMOPkxt4YaA9EBK0XPon91LleifgCYJLmxuAZaXRWZeDN4A9e4Jt2toy21qjM1moB20ypKwGl1HqyVGwhbfzcaOQ2IruLmrVAL3Zo1kgvel1Hf7PcpdxL0wsGy9EB2lE3mzEuLGZQgzuXcCw4Jh5Y9YIWsO0xZh+gX8RTJWR1Nv5K/E/PCDmfpFt3BdB7WX4+UYPzFlw3hv5ZUErHH6MMLLFT4uPBHckixPg2vwV9wU3MogwdH+4AVXs7PqaYIMDhfcCKmGz1CL1gOQKs3jB9Y8RjD4Ungidf+xCloM2L2/MYQZUyqGH4jd51EKov+pYaVe0/3PAK8rKdub6IA2R3NxhqGoTUQBiu7gNGCZmL/SigsEV05X+PhYmFROxMJAYOpSgr3jRa+sH3Era2+4QJVQwGXzMqtbeWLVQLygci4trgYG0BOxplAUDpbgoB8An1Ad0q0BZVqh5FokDrgb7KR9TLGYOJ3mLdlDXgloLuwC9lvdW+oazSvR/tJWIbnuMYfzCrT8y3r/COg84l8LCDDi9eIsNZyhfsf7JlIYJZUA66P8H6lBI1oWdj8+DzPF+hu3l+26PplQ3AlQQFF4Yav5LlCEae0GQI2IqoyaINZH4D15fxM9BGJeb6lnVLQ278PwJ1GXaWBVpfKXWynslDAOqO/UIrVnzuvoo+ofx8Wplfn+pXhPBxvgiHUt7HUDFx/aM64IYyy8WwwgFguUvo+C/pp+oA5zCjhobAdkp/aFmiwfAf1G8LI7XKypU6nU6o4F8w4HWIMkWw9Q2+OHaKxDAaAy+AX8T3M0L86/cakAhcfoP9wkMmmsAd4IYMIAZwYRNwnWd709H1l+iACFFfl6/39RGCq2vlizE6UGR3Ke5RN1FMkpnvuLGGC4svqXBqDkhldEX3AeVH5ZjJZys3fZVR12m6pJn5w/uECVBiJwY/JKItMSUTJiGCpkk2TULI6MEz2wQZgXubb/hTr18RicrABfdQuig1hrDA5lwtMQA5go+UdECxOyIkysYfE3khmXbFi5l0QcLShuuoMGxm+g6fwp+IEUfiB4PEXUdrtX2zSEIbjFTMG9zK0D8JmXyOl8R4YVi+pvBC+C2yNMrRXAdHeG9z6vUJtu5TLqYjqG/cmbiVeodJE70+YMwy6I9x3LzCElSBLWChZtdY/uNAdxixSGtJmQOOydQ5m6CAZr5ZhhuAD8TUwB5ZkcBmCJLqVH5HiAcZSnkgD8iyinqCVBoNywL0jlzdliS7J8R8Md1HgueCYtwWNm83GVFzi2LGNT0bmDXTFiDcqOoQ5m+JK3yD/wCk+dnqDBLjk9YgRizFax51nJ/UFbKsDUeBvAbA8/8AeYCA+bmnqL7I7hV8U3cHUHjuaUuPEcwL1KtohGG+4KHqOKHBkTabpl9osoOPEQoe4QnXolqzFoniijuPKtNqjKv1BRMKiD6azKes1Gg9B4i4l5hAqLKK0+4xQYMubh2WYKNS9t9QxwbTgal4mnDNQYi9QcYRWPswixFH+IwvqDi3/cFcN1uK53DUY6E6i8nuX4ivcoB13DGoTqDB8kWYM6mzwycBaLHcjRmN18xe4txb4f4f38Yuw3B8YYWwnF8By/g8XEVEAUQeBmZfDCLEvEdVhpjzmCBEROjwhzuUU7cQl4jGX/FfvLlyjw9kyRTeZd6juXHf8UXqAFHBzmoRVLjQPuLSm2HcyCbNMdJarlZ8QY5Yv8ll88sw0fMuXLl/wBdTyzAUfw1xthNMJlLg96jJHSO1BEEWL/NacXyLnB8Sm6lPNHZKL0Q/h1LqXLjhcHDAfc7gzRLxPcNsW2XHipWJUqMo+WObmYsDbfkiWm4E3G3BP//Z" alt="LaMarco Collins" class="profile-image">
+                    <img src="https://avatars.githubusercontent.com/u/216300347?v=4" alt="LaMarco Collins" class="profile-image">
                 </div>
                 <h1 class="name">LaMarco Collins</h1>
                 <p class="title">Holistic Health Educator &amp; Founder of SOLIFIC</p>
@@ -211,25 +105,42 @@
                 <div class="highlight-item"><div class="highlight-number">4+</div><div class="highlight-label">Years Experience</div></div>
                 <div class="highlight-item"><div class="highlight-number">107K</div><div class="highlight-label">Followers</div></div>
             </div>
+            <div class="success-section">
+                <div class="success-heading">
+                    <h2>Real Stories. Real Results.</h2>
+                    <p>Helping individuals transform their health through education, nutrition, lifestyle, and personalized support.</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"After being diagnosed with diabetes, I felt lost and frustrated. Working with LaMarco helped me understand the role nutrition, consistency, and daily habits play in overall wellness. Over time, I lost weight, gained energy, and saw improvements that I never thought were possible."</p>
+                    <div class="testimonial-name">— Michael R.</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"I was dealing with HSV and had spent years searching for answers. LaMarco's guidance gave me structure, education, and a new perspective on supporting my body naturally. The transformation in my health, confidence, and overall well-being has been life-changing."</p>
+                    <div class="testimonial-name">— Jessica M.</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"I came to LaMarco after receiving a cancer diagnosis and wanting to improve my overall health. His approach helped me focus on nutrition, lifestyle, and creating healthier daily habits. I felt more empowered, informed, and supported throughout my wellness journey."</p>
+                    <div class="testimonial-name">— David T.</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"I lost over 65 pounds following LaMarco's recommendations. More importantly, I developed a healthier relationship with food and finally created habits I could maintain long-term."</p>
+                    <div class="testimonial-name">— Amanda L.</div>
+                </div>
+            </div>
             <div class="links-section">
                 <div class="section-title">Take Action Today</div>
-                <a href="https://lamarco99.github.io/lamarco-bio/discovery.html" class="link-button">
-                    <span class="link-icon">📅</span><span class="link-text">Schedule Your Wellness Consultation</span><span class="link-arrow">→</span>
-                </a>
-                <a href="https://solific-vitality-flow.lovable.app" class="link-button secondary">
-                    <span class="link-icon">⚡</span><span class="link-text">Solific Herbs</span><span class="link-arrow">→</span>
-                </a>
-                <a href="https://natureshealthhaven.com/?ref=site" class="link-button secondary">
-                    <span class="link-icon">🌱</span><span class="link-text">Nature's Health Haven</span><span class="link-arrow">→</span>
-                </a>
+                <a href="https://lamarco99.github.io/lamarco-bio/discovery.html" class="link-button"><span class="link-icon">📅</span><span class="link-text">Schedule Your Wellness Consultation</span><span class="link-arrow">→</span></a>
+                <a href="https://solific-vitality-flow.lovable.app" class="link-button secondary"><span class="link-icon">⚡</span><span class="link-text">Solific Herbs</span><span class="link-arrow">→</span></a>
+                <a href="https://natureshealthhaven.com/?ref=site" class="link-button secondary"><span class="link-icon">🌱</span><span class="link-text">Nature's Health Haven</span><span class="link-arrow">→</span></a>
             </div>
             <div class="footer">
                 <div class="divider"></div>
                 <div class="footer-text">Connect With Me</div>
-                <div class="social-links">
-                    <a href="https://instagram.com/_iamlamarco" class="social-link" title="Instagram">📸</a>
-                    <a href="https://www.facebook.com/lamarco.collins" class="social-link" title="Facebook">f</a>
-                </div>
+                <div class="social-links"><a href="https://instagram.com/_iamlamarco" class="social-link" title="Instagram">📸</a><a href="https://www.facebook.com/lamarco.collins" class="social-link" title="Facebook">f</a></div>
                 <p class="cta-text">Follow for daily wellness insights &amp; plant-based living tips</p>
             </div>
         </div>
