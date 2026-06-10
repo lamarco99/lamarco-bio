@@ -7,28 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --lux-black: #111111;
-            --charcoal: #2B2B2B;
-            --gold: #C8A96B;
-            --bronze: #8C6A43;
-            --ivory: #F8F5EF;
-            --soft-ivory: #FFFCF6;
-            --muted: #6E675B;
-            --line: rgba(140, 106, 67, 0.18);
-        }
+        :root { --lux-black: #111111; --charcoal: #2B2B2B; --gold: #C8A96B; --bronze: #8C6A43; --ivory: #F8F5EF; --soft-ivory: #FFFCF6; --muted: #6E675B; --line: rgba(140, 106, 67, 0.18); }
         html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: radial-gradient(circle at top right, rgba(200,169,107,0.14), transparent 32%), linear-gradient(135deg, #070707 0%, #111111 50%, #2B2B2B 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
+        body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; background: radial-gradient(circle at top right, rgba(200,169,107,0.14), transparent 32%), linear-gradient(135deg, #070707 0%, #111111 50%, #2B2B2B 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; position: relative; overflow-x: hidden; }
         body::before { content: ''; position: fixed; top: -50%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(200,169,107,0.14) 0%, transparent 70%); border-radius: 50%; animation: float 20s infinite ease-in-out; z-index: 0; }
         body::after { content: ''; position: fixed; bottom: -20%; left: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(140,106,67,0.12) 0%, transparent 70%); border-radius: 50%; animation: float 25s infinite ease-in-out reverse; z-index: 0; }
         @keyframes float { 0%, 100% { transform: translateY(0px) translateX(0px); } 50% { transform: translateY(-50px) translateX(30px); } }
@@ -89,60 +70,17 @@
         <div class="card">
             <div class="header">
                 <div class="profile-wrapper">
-                    <img src="https://avatars.githubusercontent.com/u/216300347?v=4" alt="LaMarco Collins" class="profile-image">
+                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAsICAoIBwsKCQoNDAsNERwSEQ8PESIZGhQcKSQrKigkJyctMkA3LTA9MCcnOEw5PUNFSElIKzZPVU5GVEBHSEX/2wBDAQwNDREPESESEiFFLicuRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUX/wAARCACgAKADASIAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAAAgMBBAAFBgf/xAA7EAABAwIEBAQDBAgHAAAAAAABAAIDBBEFEiExBkFRYRMicYEUMpEjM6GxBxUWQmLB0fAkUnKCouHx/8QAGQEBAAMBAQAAAAAAAAAAAAAAAAECBAMF/8QAIREBAQADAQEAAgMBAQAAAAAAAAECAxEhMRJBIjJxQmH/2gAMAwEAAhEDEQA/APMAjAUAIgFcSAiAWAIwEGAIgFgCYAgENRZUQCIBAOVYAglqGRaHV3+UKsa919I227lBcsssq8Vcx/ztLe+4VqwIBGoKAFFkyyi1kCyFBCYVBCBRCAhNIQkIFFA4JpCEhAsBGAoARBECARgKAjCJSAjAUAIgglTklle2GAXlft2HVSLK9gcefEZnkfJGAPcqud5OrYT8spBU3CrX61E7r8wwf1VxvCNGW3vKe+ay3UQF7K8GtDL209FhuzK363zXhJ8cbUcJ07b+HJI097FamWkmwyQNlIdE42BHJd7UAXuPyXN8RxB9C4gXLCCu2vPLvtctmvHnZGrsoKyMl0TCebQpstTGAhQQiOixAshAQmFQQgUQllNcgKBYCMBC1GEBBGAhCMICCMIAiCAwFssJDmyvy6B5Audrha0FbXBbOqHNPMLns/rXTV/eN6yZ0B8lRSvI3YdCVs4cQhkgz+GbN3uFVhwunaWS5BaMOA7X3QmNooZchsC4bLB5+m+d/YJpzUucWup4Y9gZD5itHizHtjfHdry9thl5rejCoKyKOZzWlzLkEjYnf1Wor6dtI0Nj0DASNey7487OOWXeXrnw3KAOmizZSoWxhQVCm6xANkJCMoSgWQluTiEpyBIRhA1GEDAjCWCiCBiMJYRhASuUFQYZcoAu8jzcwqSnMWeYctVFnZxMvL13FPVF9KQXAXFjdYJpfh5WgxgE6nwzf2C1kcTmTSU8rnB7A06G24BB9NVdFTDGwNc6rDxyDLg+9lhmHK9HHL8p9PjqjDC8FwN9fLoB7Lna6vPjuJa14cxzbO215q3VvbFE+RznguP7ztggxXA5qLhylxKoYWPkms5p0LWOAyX9x/yC0a8Pes+7PzjRKOSy6hd2VixQVN0EHVCVJUFABKAo3JTigUEYSwUxqAwjCWEYKAwiCUXtYPM4D1SnVjR8oLinDq3dV56hoaWsN3EWuOSyKgr6+EzRxOdEOdwB/wBo/wBR4kGucKV5AHIgp3H91P45X5Hr2IcOx4tRU1RSvENZDE1rJLeV7bfK4cx33C4+prsRw6o+Dq6F4mJs1gN8/wDp6+y72GWp/UcZoyxtQ+naWOkbdrCWjUjn6LxmvxLF2YnM/Ea6q+KgeQ77U3a7tbQey4zXMq6TZcXqmA8KyTSQ12NRtEjPNHSjVrD1d1PbYKl+lSsZDgcVID56iYG38LdT+Nlb4TxbGYsDbU8RSMEUjh4Jls2UN6uPP03XE/pFxNuI8QhsL88EETWtcNiTqf5fRd8OS8jjlbfa5WKqfGLOGZvfcKyyqik0zZT0cqQHJLLbOIV7IjrbErLrWMmkjFmuNuic2uP77L92qnE9XChKFsjZBdt9ORWX6qEocUt2pRlLcgWEQKUCjBQNCknK0nogBQSP1y8tyknUVXc4vJJOq2WDYU6vlzvBEDTr/EeiDC8KfXPBddsV9TzPou3oaWOCNsULQ1rRZc9238fJ9d9Or8v5X4ZSUDCxjCAGM0DBsolp3RSHw6Vrmna77BXbtjGip10gdEXTTiKNu5z20WPH2tl+NnhuMNwqln+NBZA2MvADiQ3KCbC/XZeavxVsuPRYtUxB7X1Qley2hF9rLb4xPDJw5NUUeXwpZhB4lyS47ka620C5ySP/AA8YBtYjXp3WzXLJ6w7bLl49GxfFH19Y7750Uby2HwxZtjz7krI8PbJC18mYSDQh612HMnnmDm1njRtF7Fo39lvy4ubYjXmsWVtvrdjJJyOQxzAhYzUrQ141cwCwd6d1yp07FeozRgt8wu3quRxzA7yPnprA7ubyPdatO7/nJm3ae/yxc2sy6j6pz6SaB1ponsvtmba6wix15NWueslTE8NlGtgRYqzdU8umyeyTM3uN1GU/ZBlKcUZKW4qixQKMFKBRhBLpMug1cdguqwfAjTcMVHEUsXivDgyBpFxH5spkPW2tvquWFgbr2PgmSCs4OpaWZofE5j4pGnmMxuPxTLyeGP1yNG0zHxDo07uPNbEVVNTx+aVoI6myVX0E+FV5w8NMkj3AQ2GsgPy2/vquH4ocxuNTU8UniNp7ROcDcOePmI7XuPZZMdVzvrbntmMnHT13FmH04IjJqJBsGbfVchiOMVWLS/bOyxA3Ebdh/VUGtumRt+0C04ascWXPblk2Aq2nhb4QnzCuEgHYsI/khBzRWPRa8iwB6FXIXgtPZWc2zfjj8PpsKbTZXGKE+K3rdxsL+n5rqMMx+ixJgyS+HMd43mxHp1XnrmXuN0oxkHRc89Ey/wBdde64/wCPXQ9rm2LhdLbhr66oyRND2xs8V2gPyuB/uy5DBeGeIqqk+MhldBFqWtmccz7dG9PWy2lDWVNvtHuinaMrsuhCy5a7h71omyZyzjpZfArsPqIapgniew+G4nUO2BB5FcFxZgf7OYx8IJfFa+MSNJFiBcix76L0LAqQ4xiNO6SNgjpj4072XBmdpkDuuuvsuE44xFuLcWVssbs0URELD1DdCfrda9OVyts+MuzH8fL9cy941A35lZFIGu5gc1D4yLkaFLJdzDStH/jkuZtNNQgcbpUMo+Q6G+l0wlcrOLFjdTmsl3sQFl1b4gwPXb8BY82iirKaY3bGwzsG2w8w/I/VcMxuYEk2aOaZR4lPhtZHVUrg2WM3BIuNrWIUc74l7DxJjcVFw63FhE1tY2G1MXEEtdIANDzsNV4rq43JuTzKs4li9di8uesnfIG7Nv5W+gVdouEwnPC1LQjZ94FCJnzhWQANzB7R1NkcJu0/ihYQJH32uiuGA99U56GMFx7q9hNZHhmKU9ZJAJ/AdnbGTYFw2v6HVU2CzAoJ8+nJSh0mKcfYzWMeyF0VKx17+E27j/udcoOBqijq8RqMOxJ7my1gAgqCblsgvYe9/qFzUtyq+Z0cjXsJa5puCNwVTLGc4tLevbcVrWcF8Juha8SV1QXDxGi13Eb+gH4ryHNe56oZsYq69166qmndckOleXWv67Io4nTRvcwi7NcvO291fXjMZ4ZW29rA3Nvsqz2WcRzun+KC2w/9QyC8rCrVUhzLgfmja/M0a3PNG8C1upVckg6KliZUE6qLqCdVF1VJj5LtAGgA+qUVNwO6OJuZ2Y7BT8ga2LLC4fvEJUbtFYBVYjLIR3VYU7kVMfzBAEyHkVdBJ+8f6p0rWlrQOW6UBeRx7o3O8wHdBYGgS2m4ufVTK6zQOqWX6WVkIkf0VdyNxuUBVamBTo5XMtfbkUpWmMBgaCNCq/EjLg68jSGucbFo1977eyF79Qk3MLrHULC7NqryqmF1mN11zJT91LjsgJTqQ3UIsndEGDnqufUoYzMddk8abbIApBRIwUmX579Qm3SpD5/ZBLTomRO+bskjdEx2V57hWioQ7zH1TLgvZc6hJB1RA2dfsgY92Z9+miglQTlFuZQkqwglCpWWQQrcZ+zb6KrZOiN2DsoyTBvaHtsVWcCx1rq1dC4BwsVRKvmuoJRGIjbVCRZT1D//2Q==" alt="LaMarco Collins" class="profile-image">
                 </div>
                 <h1 class="name">LaMarco Collins</h1>
                 <p class="title">Holistic Health Educator &amp; Founder of SOLIFIC</p>
                 <div class="badge">🌿 Ancestral Wisdom</div>
             </div>
-            <div class="bio">
-                <p>LaMarco Collins is a holistic health educator and founder of SOLIFIC.</p>
-                <p>He helps individuals better understand their bodies through structured guidance, ancestral wisdom, nutrition, lifestyle practices, and personalized support. His approach focuses on helping people move from confusion to clarity by building consistency, awareness, and intentional daily habits.</p>
-                <p>Through education, coaching, and community, LaMarco helps clients create sustainable wellness practices that support long-term transformation.</p>
-            </div>
-            <div class="highlights">
-                <div class="highlight-item"><div class="highlight-number">1000+</div><div class="highlight-label">People Healed</div></div>
-                <div class="highlight-item"><div class="highlight-number">4+</div><div class="highlight-label">Years Experience</div></div>
-                <div class="highlight-item"><div class="highlight-number">107K</div><div class="highlight-label">Followers</div></div>
-            </div>
-            <div class="success-section">
-                <div class="success-heading">
-                    <h2>Real Stories. Real Results.</h2>
-                    <p>Helping individuals transform their health through education, nutrition, lifestyle, and personalized support.</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"After being diagnosed with diabetes, I felt lost and frustrated. Working with LaMarco helped me understand the role nutrition, consistency, and daily habits play in overall wellness. Over time, I lost weight, gained energy, and saw improvements that I never thought were possible."</p>
-                    <div class="testimonial-name">— Michael R.</div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"I was dealing with HSV and had spent years searching for answers. LaMarco's guidance gave me structure, education, and a new perspective on supporting my body naturally. The transformation in my health, confidence, and overall well-being has been life-changing."</p>
-                    <div class="testimonial-name">— Jessica M.</div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"I came to LaMarco after receiving a cancer diagnosis and wanting to improve my overall health. His approach helped me focus on nutrition, lifestyle, and creating healthier daily habits. I felt more empowered, informed, and supported throughout my wellness journey."</p>
-                    <div class="testimonial-name">— David T.</div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"I lost over 65 pounds following LaMarco's recommendations. More importantly, I developed a healthier relationship with food and finally created habits I could maintain long-term."</p>
-                    <div class="testimonial-name">— Amanda L.</div>
-                </div>
-            </div>
-            <div class="links-section">
-                <div class="section-title">Take Action Today</div>
-                <a href="https://lamarco99.github.io/lamarco-bio/discovery.html" class="link-button"><span class="link-icon">📅</span><span class="link-text">Schedule Your Wellness Consultation</span><span class="link-arrow">→</span></a>
-                <a href="https://solific-vitality-flow.lovable.app" class="link-button secondary"><span class="link-icon">⚡</span><span class="link-text">Solific Herbs</span><span class="link-arrow">→</span></a>
-                <a href="https://natureshealthhaven.com/?ref=site" class="link-button secondary"><span class="link-icon">🌱</span><span class="link-text">Nature's Health Haven</span><span class="link-arrow">→</span></a>
-            </div>
-            <div class="footer">
-                <div class="divider"></div>
-                <div class="footer-text">Connect With Me</div>
-                <div class="social-links"><a href="https://instagram.com/_iamlamarco" class="social-link" title="Instagram">📸</a><a href="https://www.facebook.com/lamarco.collins" class="social-link" title="Facebook">f</a></div>
-                <p class="cta-text">Follow for daily wellness insights &amp; plant-based living tips</p>
-            </div>
+            <div class="bio"><p>LaMarco Collins is a holistic health educator and founder of SOLIFIC.</p><p>He helps individuals better understand their bodies through structured guidance, ancestral wisdom, nutrition, lifestyle practices, and personalized support. His approach focuses on helping people move from confusion to clarity by building consistency, awareness, and intentional daily habits.</p><p>Through education, coaching, and community, LaMarco helps clients create sustainable wellness practices that support long-term transformation.</p></div>
+            <div class="highlights"><div class="highlight-item"><div class="highlight-number">1000+</div><div class="highlight-label">People Healed</div></div><div class="highlight-item"><div class="highlight-number">4+</div><div class="highlight-label">Years Experience</div></div><div class="highlight-item"><div class="highlight-number">107K</div><div class="highlight-label">Followers</div></div></div>
+            <div class="success-section"><div class="success-heading"><h2>Real Stories. Real Results.</h2><p>Helping individuals transform their health through education, nutrition, lifestyle, and personalized support.</p></div><div class="testimonial-card"><div class="stars">★★★★★</div><p>"After being diagnosed with diabetes, I felt lost and frustrated. Working with LaMarco helped me understand the role nutrition, consistency, and daily habits play in overall wellness. Over time, I lost weight, gained energy, and saw improvements that I never thought were possible."</p><div class="testimonial-name">— Michael R.</div></div><div class="testimonial-card"><div class="stars">★★★★★</div><p>"I was dealing with HSV and had spent years searching for answers. LaMarco's guidance gave me structure, education, and a new perspective on supporting my body naturally. The transformation in my health, confidence, and overall well-being has been life-changing."</p><div class="testimonial-name">— Jessica M.</div></div><div class="testimonial-card"><div class="stars">★★★★★</div><p>"I came to LaMarco after receiving a cancer diagnosis and wanting to improve my overall health. His approach helped me focus on nutrition, lifestyle, and creating healthier daily habits. I felt more empowered, informed, and supported throughout my wellness journey."</p><div class="testimonial-name">— David T.</div></div><div class="testimonial-card"><div class="stars">★★★★★</div><p>"I lost over 65 pounds following LaMarco's recommendations. More importantly, I developed a healthier relationship with food and finally created habits I could maintain long-term."</p><div class="testimonial-name">— Amanda L.</div></div></div>
+            <div class="links-section"><div class="section-title">Take Action Today</div><a href="https://lamarco99.github.io/lamarco-bio/discovery.html" class="link-button"><span class="link-icon">📅</span><span class="link-text">Schedule Your Wellness Consultation</span><span class="link-arrow">→</span></a><a href="https://solific-vitality-flow.lovable.app" class="link-button secondary"><span class="link-icon">⚡</span><span class="link-text">Solific Herbs</span><span class="link-arrow">→</span></a><a href="https://natureshealthhaven.com/?ref=site" class="link-button secondary"><span class="link-icon">🌱</span><span class="link-text">Nature's Health Haven</span><span class="link-arrow">→</span></a></div>
+            <div class="footer"><div class="divider"></div><div class="footer-text">Connect With Me</div><div class="social-links"><a href="https://instagram.com/_iamlamarco" class="social-link" title="Instagram">📸</a><a href="https://www.facebook.com/lamarco.collins" class="social-link" title="Facebook">f</a></div><p class="cta-text">Follow for daily wellness insights &amp; plant-based living tips</p></div>
         </div>
     </div>
 </body>
