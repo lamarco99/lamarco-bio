@@ -1,0 +1,33 @@
+name: Update bio copy
+on:
+  push:
+    paths:
+      - '.github/workflows/update-bio-copy.yml'
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Refresh header bio
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace('<title>LaMarco Collins - Holistic Health Educator</title>', '<title>LaMarco Collins | Wellness Educator, Speaker & Founder of SOLIFIC</title>')
+          s=s.replace('<p class="title">Holistic Health Educator &amp; Founder of SOLIFIC</p>\n                <div class="badge">🌿 Ancestral Wisdom</div>', '<p class="title">Wellness Educator • Speaker • Founder of SOLIFIC</p>')
+          old='<div class="bio"><p>LaMarco Collins is a holistic health educator and founder of SOLIFIC.</p><p>He helps individuals better understand their bodies through structured guidance, ancestral wisdom, nutrition, lifestyle practices, and personalized support. His approach focuses on helping people move from confusion to clarity by building consistency, awareness, and intentional daily habits.</p><p>Through education, coaching, and community, LaMarco helps clients create sustainable wellness practices that support long-term transformation.</p></div>'
+          new='<div class="bio"><p>Helping people reconnect with their bodies, build intentional daily habits, and create sustainable wellness through education, ancestral wisdom, nutrition, and lifestyle.</p><p style="text-align:center; margin-top:20px; font-size:12px; font-weight:800; letter-spacing:1px; color:var(--bronze); text-transform:uppercase;">Wellness • Education • Ancestral Wisdom • Intentional Living</p></div>'
+          s=s.replace(old,new)
+          s=s.replace(".bio::before { content: 'Grounded Guidance'; display: block; width: fit-content; margin: 0 auto 18px; padding: 7px 14px; border-radius: 999px; background: rgba(200,169,107,0.18); color: var(--bronze); font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }", ".bio::before { content: none; }")
+          p.write_text(s)
+          PY
+      - name: Commit update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Refresh LaMarco bio copy and header"
+          git push
