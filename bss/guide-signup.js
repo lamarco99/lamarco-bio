@@ -10,11 +10,12 @@ const payload={email:form.elements.email.value.trim(),firstName:form.elements.fi
 try{
 const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({...payload,marketingConsent:String(payload.marketingConsent)}),credentials:'omit',signal:AbortSignal.timeout(25000)});
 let result;try{result=await response.json();}catch{throw Error('invalid_response');}
+if(response.status===429)throw Error('rate_limited');
 if(!response.ok||result.saved!==true)throw Error('not_saved');
 const url=new URL('guide-ready.html',location.href);
 if(result.emailSent!==true)url.searchParams.set('delivery','pending');
 location.assign(url.href);
-}catch(error){requestId=crypto.randomUUID();status.textContent='We couldn’t confirm your request. Please try again. You won’t be redirected until it has been saved.';}
+}catch(error){requestId=crypto.randomUUID();status.textContent=error.message==='rate_limited'?'Too many requests. Please try again later. If you already requested the guide, check your inbox.':'We couldn’t confirm your request. Please try again. You won’t be redirected until it has been saved.';}
 finally{inFlight=false;button.disabled=false;}
 });
 })();
