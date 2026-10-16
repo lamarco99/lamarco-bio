@@ -1,3 +1,7 @@
+# Superseded draft template
+
+The live workflow is maintained in n8n: https://lamarco.app.n8n.cloud/workflow/C9I8FKotfiVmWteK . It now uses Gmail OAuth and the legacy Notion database API required by the connected Notion credential. Do not import the original n8n-ai-guide.json over that tested workflow. The website frontend has been deployed to main; this branch preserves the initial implementation draft only.
+
 # BSS native guide funnel — activation
 Status: built, inactive, not connected to live traffic.
 
