@@ -1,0 +1,466 @@
+{
+  "name": "BSS \u2014 Native AI Guide Signup \u2192 Notion \u2192 PDF Email",
+  "nodes": [
+    {
+      "id": "c5cc34f1-f33e-444e-ac69-64767b884d0f",
+      "name": "Signup webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bss-ai-guide",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "https://lamarco99.github.io",
+          "ignoreBots": true
+        }
+      }
+    },
+    {
+      "id": "a0c21175-5c84-493c-aa20-58d7e43747e3",
+      "name": "Validate signup",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const raw=$json.body||{};const origin=$json.headers?.origin;const email=String(raw.email||'').trim().toLowerCase();const firstName=String(raw.firstName||'').trim();const requestId=String(raw.requestId||'');\nconst valid=origin==='https://lamarco99.github.io'&&!raw.website&&email.length<=254&&/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)&&firstName.length<=80&&/^[0-9a-f-]{36}$/i.test(requestId);\nreturn [{json:{valid,email,firstName,requestId,marketingConsent:raw.marketingConsent==='true',submittedAt:new Date().toISOString()}}];"
+      }
+    },
+    {
+      "id": "2c40dccd-ae08-48eb-b352-c6178d40e52a",
+      "name": "Valid request",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        440,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "valid",
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "77c0d823-a7ee-4899-a150-aa197a97fd31",
+      "name": "Find signup",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        660,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.notion.com/v1/data_sources/0edc4b55-7612-417d-9e05-37f79b70e555/query",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "notionApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Notion-Version",
+              "value": "2025-09-03"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({filter:{property:\"Email\",title:{equals:$(\"Validate signup\").first().json.email}},page_size:1}) }}",
+        "options": {
+          "timeout": 15000
+        }
+      }
+    },
+    {
+      "id": "d8605733-6f80-4767-a05e-6d140c8b902d",
+      "name": "Existing signup",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        880,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "exists",
+              "leftValue": "={{ $json.results.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "f602502c-77e8-4f02-bc78-abebfd9fc598",
+      "name": "Create signup",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1100,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.notion.com/v1/pages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "notionApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Notion-Version",
+              "value": "2025-09-03"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({parent:{type:\"data_source_id\",data_source_id:\"0edc4b55-7612-417d-9e05-37f79b70e555\"},properties:(()=>{const d=$(\"Validate signup\").first().json;return {Email:{title:[{text:{content:d.email}}]},\"First Name\":{rich_text:[{text:{content:d.firstName}}]},\"Marketing Consent\":{checkbox:d.marketingConsent},\"Source\":{rich_text:[{text:{content:\"BSS native free-guide form\"}}]},\"Guide\":{rich_text:[{text:{content:\"Your First AI Business Workflow\"}}]},\"Submitted At\":{date:{start:d.submittedAt}},\"Delivery Status\":{select:{name:\"Pending\"}}};})()}) }}",
+        "options": {
+          "timeout": 15000
+        }
+      }
+    },
+    {
+      "id": "17afff94-99e5-449f-8fa1-6859e6f42228",
+      "name": "Existing page",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1100,
+        0
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ \"https://api.notion.com/v1/pages/\"+$json.results[0].id }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "notionApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Notion-Version",
+              "value": "2025-09-03"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({properties:{\"Marketing Consent\":{checkbox:$json.results[0].properties[\"Marketing Consent\"].checkbox || $(\"Validate signup\").first().json.marketingConsent},\"Delivery Status\":{select:{name:\"Pending\"}}}}) }}",
+        "options": {
+          "timeout": 15000
+        }
+      }
+    },
+    {
+      "id": "96a9313b-0b54-49ae-8d09-d228415f44cb",
+      "name": "Signup page",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1320,
+        0
+      ],
+      "parameters": {
+        "jsCode": "return [{json:{pageId:$json.id,email:$(\"Validate signup\").first().json.email}}];"
+      }
+    },
+    {
+      "id": "040f8e3c-67a4-47cb-a615-effdf83e4ffb",
+      "name": "Email guide",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1540,
+        0
+      ],
+      "parameters": {
+        "fromEmail": "REPLACE_WITH_CONNECTED_SENDER",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Your free AI workflow guide is here",
+        "emailFormat": "text",
+        "text": "Here is your free copy of Your First AI Business Workflow:\n\nhttps://lamarco99.github.io/lamarco-bio/bss/assets/your-first-ai-workflow.pdf\n\nStart with one repeated task, then use the planning sheet and reusable prompt.\n\nWant help building your workflow?\nhttps://lamarco99.github.io/lamarco-bio/bss/project.html?project=workflow\n\n\u2014 LaMarco Collins\nBusiness Systems Studio",
+        "options": {}
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "id": "eacd3f81-1cc9-4b46-83a1-dd59b6d3308d",
+      "name": "Mark email accepted",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1760,
+        0
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ \"https://api.notion.com/v1/pages/\"+$(\"Signup page\").first().json.pageId }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "notionApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Notion-Version",
+              "value": "2025-09-03"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({properties:{\"Delivery Status\":{select:{name:\"Sent\"}},Notes:{rich_text:[{text:{content:\"SMTP accepted delivery request; inbox placement not confirmed.\"}}]}}}) }}",
+        "options": {
+          "timeout": 15000
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "id": "ad06dc73-6e99-4c8c-a509-318a490d6b95",
+      "name": "Saved and emailed",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1980,
+        0
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"saved\":true,\"emailSent\":true}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Cache-Control",
+                "value": "no-store"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "271e705e-1272-4f53-96b9-c01e041aabfa",
+      "name": "Saved email pending",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1760,
+        0
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"saved\":true,\"emailSent\":false}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Cache-Control",
+                "value": "no-store"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "37404375-a7df-4b87-8a7b-bcdcdbf1a32e",
+      "name": "Invalid request",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        660,
+        0
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"saved\":false,\"error\":\"invalid_request\"}",
+        "options": {
+          "responseCode": 400
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Signup webhook": {
+      "main": [
+        [
+          {
+            "node": "Validate signup",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate signup": {
+      "main": [
+        [
+          {
+            "node": "Valid request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Valid request": {
+      "main": [
+        [
+          {
+            "node": "Find signup",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Invalid request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find signup": {
+      "main": [
+        [
+          {
+            "node": "Existing signup",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Existing signup": {
+      "main": [
+        [
+          {
+            "node": "Existing page",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create signup",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Existing page": {
+      "main": [
+        [
+          {
+            "node": "Signup page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create signup": {
+      "main": [
+        [
+          {
+            "node": "Signup page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Signup page": {
+      "main": [
+        [
+          {
+            "node": "Email guide",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email guide": {
+      "main": [
+        [
+          {
+            "node": "Mark email accepted",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Saved email pending",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark email accepted": {
+      "main": [
+        [
+          {
+            "node": "Saved and emailed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataSuccessExecution": "none",
+    "saveDataErrorExecution": "all"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "pinData": {}
+}
